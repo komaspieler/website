@@ -140,11 +140,10 @@ Anschließend die Änderungen speichern. Der Rest kann komplett konform mit der 
 
 ---
 
-Ich habe letzten Monat eine Mail bekommen mit einer sehr nützlichen Ergänzung zu Schritt 10 der offiziellen Anleitung und einer vollständigen Anpassung an die Besonderheiten bei Uberspace.
+### Schritt 10 
 
-Hier das Vollzitat der Ergänzung von Jonatan (danke!):
-		
->Bei Schritt 10 sind nochmal ein paar Anpassungen notwendig. Wir starten hier den "qrunner" der dafür sorgt, dass Mailman ankommende Mails auch an die Mitglieder der Mailinglisten verteilen kann. Außerdem stellen wir sicher, dass der qrunner nach einem Reboot automatisch gestartet wird. Dazu greifen wir auf die daemontools, die von uberspace bereit gestellt werden, zurück.
+
+>Bei [Schritt 10](https://www.gnu.org/software/mailman/mailman-install/node42.html) sind nochmal ein paar Anpassungen notwendig. Wir starten hier den "qrunner" der dafür sorgt, dass Mailman ankommende Mails auch an die Mitglieder der Mailinglisten verteilen kann. Außerdem stellen wir sicher, dass der qrunner nach einem Reboot automatisch gestartet wird. Dazu greifen wir auf die daemontools, die von uberspace bereit gestellt werden, zurück.
 >
 >[Lest euch dazu unbedingt den Artikel im uberspace-wiki durch, da es ein paar Stolperfallen gibt, die man kennen sollte.](https://wiki.uberspace.de/system:daemontools)
 >
@@ -192,3 +191,6 @@ Hier das Vollzitat der Ergänzung von Jonatan (danke!):
 >ln -s ~/etc/mailman-supervise ~/service
 >```	
 >Nun läuft der qrunner. Mit dem Befehl `svstat ~/service/mailman-supervise` kann man das noch überprüfen. Der Befehl gibt zurück wie lange der Daemon bereits läuft.
+
+Ergänzung zu Schritt 10 von Jonatan von [Uberspace](https://uberspace.de)
+		
