@@ -3,7 +3,6 @@ title: "Mailman bei Uberspace"
 subtitle: Ein Tutorial zur Installation von Mailman auf einem Uberspace
 date: 2015-09-16
 ---
-> **Update 16.09.2015:** Ich habe eine Mail von Jonatan mit einer wichtigen & nützlichen Ergänzung erhalten. Seine Anleitung ist nun unten an das Tutorial angehangen
 
 [Mailman](http://www.gnu.org/software/mailman/) dürfte als Listenmanager bekannt sein wie ein bunter Hund: das benutzerfreundliche Web-Frontend und die gelungenen Archivmöglichkeiten machen ihn zum Listenmanager der Wahl für den Otto-Normal-Nutzer, der die Kommandozeilenbasierte Verwaltung von Mailinglisten nicht gewohnt ist.
 
