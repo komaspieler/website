@@ -9,6 +9,9 @@ date: 2015-09-16
 <!--more-->
 Uberspace bietet von Haus aus [ezmlm-idx Mailinglisten](https://wiki.uberspace.de/mail:ezmlmidx) an. ezmlmidx hat aber z.B. kein Webinterface zum Abbonieren und muss per Kommandozeile administriert werden. Wer seinen Listenmitgliedern und Admins ein Webinterface bieten möchte oder aus anderen Gründen einen mailman haben will, für den ist bei Uberspace die Installation und Benutzung von Mailman wie so vieles anderes ebenfalls möglich - es müssen aber einige Besonderheiten bedacht werden, die man normalerweise nicht berücksichtigen würde.
 
+Dieses Tutorial bezieht sich auf das aktuelle [uberspace mit ContOS 6](https://uberspace.de/tech), nicht auf die [uberspace 7 beta](https://blog.uberspace.de/wip-die-u7-public-beta/).
+
+
 ---
 
 **Dieses Tutorial ergänzt das [offizielle Installation Manual](https://www.gnu.org/software/mailman/mailman-install/mailman-install.html) auf die Besonderheiten bei Uberspace in den Schritten 1 - 7 und 10.**
