@@ -40,7 +40,7 @@ Zum Herunterladen des Pakets für Mailman 2.1.17 loggen wir uns zunächst bei Ub
     cd ~/tmp/mailman-2.1.17/
 
 Bevor wir weiter machen, legen wir nun auch schon das Installationsverzeichnis an:
-	
+
     mkdir /var/www/virtual/`whoami`/mailman
     chmod a+rx,g+ws /var/www/virtual/`whoami`/mailman
 
@@ -59,7 +59,7 @@ Nun müssen wir Mailmans configure laufen lassen mit folgendem Aufbau (Optionen 
 ### Schritt 3 - make & make install
 
 Wenn alles gut gegangen ist bei configure, können wir nun make ausführen:
-	
+
     make
 
 Erscheinen hier keine Fehler, kann auch	`make install`	ausgeführt werden.
@@ -73,13 +73,13 @@ Wir wechseln mit `cd /var/www/virtual/`whoami`/mailman` in das Verzeichnis und f
 ### Schritt 5 - den Webserver vorbereiten
 
 Bei diesem Schritt hatte ich die meisten Probleme. Da wir bei Uberspace keinen Zugriff auf die VirtualHost-Konfiguration des Webservers haben, kann dieser Schritt nicht entsprechend des offiziellen Handbuchs befolgt werden. Stattdessen müssen wir einen SymLink und eine htaccess Datei anlegen:
-	
+
     ln -s /var/www/virtual/`whoami`/mailman/cgi-bin /var/www/virtual/`whoami`/html/mailman
     ln -s /var/www/virtual/`whoami`/mailman/archives/public /var/www/virtual/`whoami`/html/pipermail
     printf "Options +ExecCGI\nSetHandler cgi-script" > /var/www/virtual/`whoami`/mailman/cgi-bin/.htaccess
 
 Anschließend korrigieren wir noch die Datei- und Verzeichnisrechte für die CGI-Skripte:
-	
+
     chmod -R 0755 /var/www/virtual/`whoami`/mailman/cgi-bin
 
 
@@ -194,5 +194,4 @@ ln -s ~/etc/mailman-supervise ~/service
 ```	
 Nun läuft der qrunner. Mit dem Befehl `svstat ~/service/mailman-supervise` kann man das noch überprüfen. Der Befehl gibt zurück wie lange der Daemon bereits läuft.
 
-Ergänzung zu Schritt 10 von Jonatan von [Uberspace](https://uberspace.de)
-		
+Ergänzung zu Schritt 10 von Jonatan von [Uberspace](https://uberspace.de).
