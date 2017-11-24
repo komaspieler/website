@@ -22,8 +22,9 @@ Nicht zuletzt deshalb war auch ich nur wegen der Hilfestellungen und Hinweise de
 
 Im Folgenden gelten folgende Variablen:
 
-- `$host` - Name des Uberspace-Hosts
-- `$domain` - die Domain unter der Mailman laufen soll
+- `$uberspacehosthost` - Name des Uberspace-Hosts
+- `$mailhost` - die Domain der Mailadressen der Mailmanlisten 
+- `$urlhost` - die Domain unter der das Mailman Webfrontend laufen soll
 
 Außerdem gehe ich davon aus, dass du die angegebenen Befehle auf dem Zielaccount bei Uberspace ausführst. Sollte dies nicht der Fall sein, musst du ggf. in allen relevanten Befehlen die Zeichenkette `` `whoami` `` durch den gewünschten Benutzernamen ersetzen.
 
@@ -52,8 +53,8 @@ Nun müssen wir Mailmans configure laufen lassen mit folgendem Aufbau (Optionen 
     ./configure --with-username=`whoami` --with-groupname=`whoami` \
     --prefix=/var/www/virtual/`whoami`/mailman/ \
     --with-mail-gid=`whoami` --with-cgi-gid=`whoami` \
-    --with-mailhost=`whoami`.`hostname` \
-    --with-urlhost=$domain
+    --with-mailhost=$mailhost \
+    --with-urlhost=$urlhost
 
 
 ### Schritt 3 - make & make install
@@ -121,7 +122,7 @@ Zuerst legt ein E-Mail Postfach für den Listenverkehr im Webinterface von Ubers
 Dann müssen an der dafür vorgesehenen Stelle (siehe Originaldatei) folgende Zeilen eingefügt werden:
 
     SMTP_AUTH = Yes
-    SMTPHOST = '$host.uberspace.de'
+    SMTPHOST = '$uberspacehost.uberspace.de'
     SMTPPORT = '587'
     SMTP_USERNAME = 'listenversender@domain.tld'
     SMTP_PASSWORD = 'HollaDieWaldF33!'
