@@ -141,7 +141,16 @@ Nun muss die ASMTPDirect.py noch bearbeitet werden (z.B. mit nano), wobei folgen
 
 Anschließend die Änderungen speichern. Der Rest kann komplett konform mit der [offiziellen Anleitung](https://www.gnu.org/software/mailman/mailman-install/customizing.html) befolgt werden. Hier kann mit Schritt 7 weiter gemacht werden (Customizing).
 
----
+
+### Schritt 9
+
+Im Schritt [Set up cron](https://www.gnu.org/software/mailman/mailman-install/node41.html) soll man den cron als user `mailman` (`crontab -u mailman crontab.in`) anlegen. 
+
+Da mailman unter deinem uberspace-user läuft muss und kann man den [cron](https://wiki.uberspace.de/system:cron) als uberspace-user anlegen. 
+
+```
+crontab crontab.in
+```
 
 ### Schritt 10 
 
