@@ -111,13 +111,13 @@ Im [Handbuch zur Installation](https://www.gnu.org/software/mailman/mailman-inst
 Dieses Skript wird dann im Home-Verzeichnis z.B. als addlist.sh als ausführbare Datei abgelegt und muss ausgeführt werden, wenn eine neue Liste angelegt wird (als `~/addlist.sh listenname`).
 
 
-### ~~Schritt 7 - die restliche Installation~~
+### Schritt 7 - die restliche Installation
 
 > **Update 25.03.2017:** In neueren Versionen ist diese Anpassung nicht mehr nötig, da die SMTP Auth Option offiziell übernommen und eingepflegt wurde!
 
-Der Rest der Installation läuft mit einer Ausnahme ab wie im offiziellen Handbuch geschrieben. Die Ausnahme bezieht sich auf die Anpassung der mm_cfg.py in /var/www/virtual/`whoami`/mailman/Mailman:
+Der Rest der Installation läuft mit einer Ausnahme ab wie im [offiziellen Handbuch](https://www.gnu.org/software/mailman/mailman-install/customizing.html) geschrieben. Die Ausnahme bezieht sich auf die Anpassung der mm_cfg.py in /var/www/virtual/`whoami`/mailman/Mailman:
 
-Zuerst legt ein E-Mail Postfach für den Listenverkehr im Webinterface von Uberspace an (z.B. 'listenversender@domain.tld' mit Passwort 'HollaDieWaldF33!' - ihr benutzt natürlich andere Daten!!).	
+Zuerst legt ein [E-Mail Postfach](https://wiki.uberspace.de/mail:vmailmgr) für den Listenverkehr im Webinterface von Uberspace oder auf der [Konsole](https://wiki.uberspace.de/mail:vmailmgr#e-mail-account_anlegen) an (z.B. 'listenversender@domain.tld' mit Passwort 'HollaDieWaldF33!' - ihr benutzt natürlich andere Daten!!).
 
 Dann müssen an der dafür vorgesehenen Stelle (siehe Originaldatei) folgende Zeilen eingefügt werden:
 
