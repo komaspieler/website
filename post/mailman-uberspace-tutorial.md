@@ -212,3 +212,4 @@ Ergänzung zu Schritt 10 von Jonatan von [Uberspace](https://uberspace.de).
 Du hast alles so gemacht wie oben beschreiben und es läuft trotzdem nicht?
 Unter `/var/www/virtual/`whoami`/mailman/logs` werden zahlreiche logs geschrieben.
 
+Oder im [offiziellen Troubleshooting](https://www.gnu.org/software/mailman/mailman-install/troubleshooting.html) nachschlagen.
