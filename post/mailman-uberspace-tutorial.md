@@ -196,3 +196,10 @@ ln -s ~/etc/mailman-supervise ~/service
 Nun läuft der qrunner. Mit dem Befehl `svstat ~/service/mailman-supervise` kann man das noch überprüfen. Der Befehl gibt zurück wie lange der Daemon bereits läuft.
 
 Ergänzung zu Schritt 10 von Jonatan von [Uberspace](https://uberspace.de).
+
+
+## Debug
+
+Du hast alles so gemacht wie oben beschreiben und es läuft trotzdem nicht?
+Unter `/var/www/virtual/`whoami`/mailman/logs` werden zahlreiche logs geschrieben.
+
