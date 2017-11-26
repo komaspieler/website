@@ -124,8 +124,8 @@ Dann müssen an der dafür vorgesehenen Stelle (siehe Originaldatei) folgende Ze
     SMTP_AUTH = Yes
     SMTPHOST = '$uberspacehost.uberspace.de'
     SMTPPORT = '587'
-    SMTP_USERNAME = 'listenversender@domain.tld'
-    SMTP_PASSWORD = 'HollaDieWaldF33!'
+    SMTP_USER = 'listenversender@domain.tld'
+    SMTP_PASSWD = 'HollaDieWaldF33!'
     DELIVERY_MODULE = 'ASMTPDirect'
 
 
@@ -137,7 +137,7 @@ Das Modul "ASMTPDirect" existiert allerdings noch nicht, dafür müssen wir noch
 Nun muss die ASMTPDirect.py noch bearbeitet werden (z.B. mit nano), wobei folgende zwei Zeilen zwischen Zeile 64 und 65 der Originaldatei eingefügt werden müssen:
 
     if mm_cfg.SMTP_AUTH:
-                    self.__conn.login(mm_cfg.SMTP_USERNAME, mm_cfg.SMTP_PASSWORD)
+                    self.__conn.login(mm_cfg.SMTP_USER, mm_cfg.SMTP_PASSWD)
 
 Anschließend die Änderungen speichern. Der Rest kann komplett konform mit der [offiziellen Anleitung](https://www.gnu.org/software/mailman/mailman-install/customizing.html) befolgt werden. Hier kann mit Schritt 7 weiter gemacht werden (Customizing).
 
