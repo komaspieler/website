@@ -149,6 +149,7 @@ Im Schritt [Set up cron](https://www.gnu.org/software/mailman/mailman-install/no
 Da mailman unter deinem uberspace-user läuft muss und kann man den [cron](https://wiki.uberspace.de/system:cron) als uberspace-user anlegen. 
 
 ```
+cd /var/www/virtual/`whoami`/mailman/cron/
 crontab crontab.in
 ```
 
