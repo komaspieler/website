@@ -207,10 +207,25 @@ Nun läuft der qrunner. Mit dem Befehl `svstat ~/service/mailman-supervise` kann
 
 Ergänzung zu Schritt 10 von Jonatan von [Uberspace](https://uberspace.de).
 
-
 ## Debug
 
 Du hast alles so gemacht wie oben beschreiben und es läuft trotzdem nicht?
 Unter `/var/www/virtual/`whoami`/mailman/logs` werden zahlreiche logs geschrieben.
 
 Oder im [offiziellen Troubleshooting](https://www.gnu.org/software/mailman/mailman-install/troubleshooting.html) nachschlagen.
+
+## https
+
+[Wir all empfehlen dir ausdrücklich, von HTTPS Gebrauch zu machen](https://wiki.uberspace.de/webserver:https) und [Mailman kann auch https](https://wiki.list.org/DOC/4.27%20Securing%20Mailman%27s%20web%20GUI%20by%20using%20Secure%20HTTP-SSL%20%28HTTPS%29).
+
+
+Dazu in in der Datei `/mailman/Mailman/mm_cfg.py` folgendes Pattern eingeben: 
+
+```
+DEFAULT_URL_PATTERN = 'https://%s/mailman/'
+```
+
+Und dann die URLs neu laden lassen.
+```
+/var/www/virtual/`whoami`/mailman/bin/withlist -l -a -r fix_url
+```
