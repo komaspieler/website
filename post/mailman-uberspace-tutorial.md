@@ -216,7 +216,7 @@ Oder im [offiziellen Troubleshooting](https://www.gnu.org/software/mailman/mailm
 
 ## https
 
-[Wir all empfehlen dir ausdrücklich, von HTTPS Gebrauch zu machen](https://wiki.uberspace.de/webserver:https) und [Mailman kann auch https](https://wiki.list.org/DOC/4.27%20Securing%20Mailman%27s%20web%20GUI%20by%20using%20Secure%20HTTP-SSL%20%28HTTPS%29).
+[Wir alle empfehlen dir ausdrücklich, von HTTPS Gebrauch zu machen](https://wiki.uberspace.de/webserver:https) und [Mailman kann auch https](https://wiki.list.org/DOC/4.27%20Securing%20Mailman%27s%20web%20GUI%20by%20using%20Secure%20HTTP-SSL%20%28HTTPS%29).
 
 
 Dazu in in der Datei `/mailman/Mailman/mm_cfg.py` folgendes Pattern eingeben: 
