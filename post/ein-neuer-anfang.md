@@ -4,7 +4,6 @@ subtitle: Umgestaltung der Seite
 date: 2017-03-25
 ---
 
-123abc
 Ich bin vor kurzem auf [Hugo](https://gohugo.io) aufmerksam gemacht worden und muss gestehen, dass ich mich ein bisschen in das System verliebt habe. So sehr, dass Typo3 jetzt 
 endgültig rausgeflogen ist und ich die Webseite mit Hugo betreiben werde - denn, wenn wir ehrlich sind, ist Typo3 für sowas ja doch etwas doller overkill ;)
 
