@@ -161,48 +161,43 @@ Bei [Schritt 10](https://www.gnu.org/software/mailman/mailman-install/node42.htm
 [Lest euch dazu unbedingt den Artikel im uberspace-wiki durch, da es ein paar Stolperfallen gibt, die man kennen sollte.](https://wiki.uberspace.de/system:daemontools)
 
 Zunächst legen wir uns einen eigenen ~/service Ordner an:
-```
-test -d ~/service || uberspace-setup-svscan
-```
+    test -d ~/service || uberspace-setup-svscan
+
 Dann erstellen wir den Ordner ~/etc/mailman-supervise:
-```
-mkdir ~/etc/mailman-supervise
-```
-Anschließend brauchen wir in diesem Ordner ein Skript mit dem Namen run, das wir z.B. mit vim erstellen:
-```
-vim ~/etc/mailman-supervise/run
-```
+    mkdir ~/etc/mailman-supervise
+
+Anschließend brauchen wir in diesem Ordner ein Skript mit dem Namen run, das wir z.B. mit nano erstellen:
+    nano ~/etc/mailman-supervise/run
+
 Der Inhalt des Skripts ist folgender:
-```
-#!/bin/sh
-exec ./qrunner
-```
+
+    #!/bin/sh
+    exec ./qrunner
+
 Als nächstes erstellen wir das Skript ~/etc/mailman-supervise/qrunner mit folgendem Inhalt:
-```
-#!/bin/sh
-while `/bin/true`; do
-/var/www/virtual/`whoami`/mailman/bin/qrunner --runner=All --once
-sleep 60
-done
-```    
+
+    #!/bin/sh
+    while `/bin/true`; do
+    /var/www/virtual/`whoami`/mailman/bin/qrunner --runner=All --once
+    sleep 60
+    done
+
 Jetzt erstellen wir den Ordner ~/etc/mailman-supervise/log:
-```
-mkdir ~/etc/mailman-supervise/log
-```	
+    mkdir ~/etc/mailman-supervise/log
+
 Und das Skript ~/etc/mailman-supervise/log/run mit dem Inhalt:
-```
-#!/bin/sh
-exec multilog t ./main
-```	
+
+    #!/bin/sh
+    exec multilog t ./main
+
 Nun ändern wir noch die Rechte:
-```
-chmod 755 ~/etc/mailman-supervise/*
-chmod 755 ~/etc/mailman-supervise/log/run
-```	
+
+    chmod 755 ~/etc/mailman-supervise/*
+    chmod 755 ~/etc/mailman-supervise/log/run
+
 Als letztes verlinken wir den Ordner ~/etc/mailman-supervise nach ~/service:
-```
-ln -s ~/etc/mailman-supervise ~/service
-```	
+    ln -s ~/etc/mailman-supervise ~/service
+
 Nun läuft der qrunner. Mit dem Befehl `svstat ~/service/mailman-supervise` kann man das noch überprüfen. Der Befehl gibt zurück wie lange der Daemon bereits läuft.
 
 Ergänzung zu Schritt 10 von Jonatan von [Uberspace](https://uberspace.de).
