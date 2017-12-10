@@ -148,10 +148,8 @@ Im Schritt [Set up cron](https://www.gnu.org/software/mailman/mailman-install/no
 
 Da mailman unter deinem uberspace-user läuft muss und kann man den [cron](https://wiki.uberspace.de/system:cron) als uberspace-user anlegen. 
 
-```
-cd /var/www/virtual/`whoami`/mailman/cron/
-crontab crontab.in
-```
+		cd /var/www/virtual/`whoami`/mailman/cron/
+		crontab crontab.in
 
 ### Schritt 10 
 
@@ -161,12 +159,15 @@ Bei [Schritt 10](https://www.gnu.org/software/mailman/mailman-install/node42.htm
 [Lest euch dazu unbedingt den Artikel im uberspace-wiki durch, da es ein paar Stolperfallen gibt, die man kennen sollte.](https://wiki.uberspace.de/system:daemontools)
 
 Zunächst legen wir uns einen eigenen ~/service Ordner an:
+
     test -d ~/service || uberspace-setup-svscan
 
 Dann erstellen wir den Ordner ~/etc/mailman-supervise:
+
     mkdir ~/etc/mailman-supervise
 
 Anschließend brauchen wir in diesem Ordner ein Skript mit dem Namen run, das wir z.B. mit nano erstellen:
+
     nano ~/etc/mailman-supervise/run
 
 Der Inhalt des Skripts ist folgender:
@@ -216,11 +217,8 @@ Oder im [offiziellen Troubleshooting](https://www.gnu.org/software/mailman/mailm
 
 Dazu in in der Datei `/mailman/Mailman/mm_cfg.py` folgendes Pattern eingeben: 
 
-```
-DEFAULT_URL_PATTERN = 'https://%s/mailman/'
-```
+		DEFAULT_URL_PATTERN = 'https://%s/mailman/'
 
 Und dann die URLs neu laden lassen.
-```
-/var/www/virtual/`whoami`/mailman/bin/withlist -l -a -r fix_url
-```
+
+		/var/www/virtual/`whoami`/mailman/bin/withlist -l -a -r fix_url
