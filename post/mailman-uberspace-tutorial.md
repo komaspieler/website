@@ -32,8 +32,6 @@ Außerdem gehe ich davon aus, dass du die angegebenen Befehle auf dem Zielaccoun
 
 > **Update vom 25.08.2014:** Diese Anleitung kann auch problemlos mit Version 2.1.18-1 durchgeführt werden! Die Abhängigkeit zu dnspython kann durch den einfachen Befehl `easy_install dnspython` erfüllt werden! (Danke, Fabian!)
 
-~~Zum Zeitpunkt dieses Tutorials ist die Version 2.1.18-1 die aktuellste von Mailman. Diese besitzt jedoch eine Abhängigkeit zum bei Uberspace nicht vorinstallierten Python-Moduls "dnspython". Da ich mich mit der Installation dieses Moduls noch nicht beschäftigt habe und ohne die Neuerungen in der .18-1 leben kann, bin ich vorerst auf die Vorgängerversion 2.1.17 umgestiegen. Ein Tutorial mit Ergänzung um die Installation von dnspython folgt eventuell noch.~~
-
 Zum Herunterladen des Pakets für Mailman 2.1.17 loggen wir uns zunächst bei Uberspace ein und laden dann das Paket, entpacken es in `~/tmp/` und wechseln in das Verzeichnis:
 
     wget http://ftp.gnu.org/gnu/mailman/mailman-2.1.17.tgz
