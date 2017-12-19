@@ -31,6 +31,7 @@ Außerdem gehe ich davon aus, dass du die angegebenen Befehle auf dem Zielaccoun
 ### Schritt 1 - das Programmarchiv besorgen
 
 > **Update vom 25.08.2014:** Diese Anleitung kann auch problemlos mit Version 2.1.18-1 durchgeführt werden! Die Abhängigkeit zu dnspython kann durch den einfachen Befehl `easy_install dnspython` erfüllt werden! (Danke, Fabian!)
+> **Information vom 19.12.2017:** Falls easy_install nicht funktioniert, kann `pip2.6 install dnspython --user` verwendet werden
 
 Zum Herunterladen des Pakets für Mailman 2.1.17 loggen wir uns zunächst bei Uberspace ein und laden dann das Paket, entpacken es in `~/tmp/` und wechseln in das Verzeichnis:
 
