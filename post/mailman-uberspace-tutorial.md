@@ -14,7 +14,7 @@ Dieses Tutorial bezieht sich auf das aktuelle [uberspace mit CentOS 6](https://u
 
 ---
 
-**Dieses Tutorial ergänzt das [offizielle Installation Manual](https://www.gnu.org/software/mailman/mailman-install/mailman-install.html) auf die Besonderheiten bei Uberspace in den Schritten 1 - 7 und 10.**
+**Dieses Tutorial ergänzt das [offizielle Installation Manual](https://www.gnu.org/software/mailman/mailman-install/mailman-install.html) auf die Besonderheiten bei Uberspace in den Schritten 1 - 7, 9 und 10.**
 
 ---
 
@@ -143,6 +143,11 @@ SMTPPORT = '587'
 SMTP_USER = 'listenversender@domain.tld'
 SMTP_PASSWD = 'HollaDieWaldF33!'
 ```
+
+
+### Schritt 8
+
+Bitte entsprechend der [Anleitung](https://www.gnu.org/software/mailman/mailman-install/site-list.html) befolgen!
 
 
 ### Schritt 9
