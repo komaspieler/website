@@ -9,7 +9,7 @@ Thomas Hoffmann
 Teltower Straße 18  
 13597 Berlin
 
-E-Mail: kontakt (ätt) emptyweb.de
+E-Mail: kontakt (ätt) emptyweb.de  
 Telegram: [komaspieler](https://telegram.me/komaspieler)
 
 **Verantwortlich für den Inhalt gem. § 55 Abs. 2 RStV ist die unter Kontakt angegebene Person.**
