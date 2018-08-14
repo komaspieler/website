@@ -22,9 +22,9 @@ Nicht zuletzt deshalb war auch ich nur wegen der Hilfestellungen und Hinweise de
 
 Im Folgenden gelten folgende Variablen:
 
-- `$uberspacehosthost` - Name des Uberspace-Hosts
-- `$mailhost` - die Domain der Mailadressen der Mailmanlisten 
-- `$urlhost` - die Domain unter der das Mailman Webfrontend laufen soll
+- ``$uberspacehosthost`` - Name des Uberspace-Hosts
+- ``$mailhost`` - die Domain der Mailadressen der Mailmanlisten 
+- ``$urlhost`` - die Domain unter der das Mailman Webfrontend laufen soll
 
 Außerdem gehe ich davon aus, dass du die angegebenen Befehle auf dem Zielaccount bei Uberspace ausführst. Sollte dies nicht der Fall sein, musst du ggf. in allen relevanten Befehlen die Zeichenkette `` `whoami` `` durch den gewünschten Benutzernamen ersetzen.
 
@@ -34,55 +34,62 @@ Außerdem gehe ich davon aus, dass du die angegebenen Befehle auf dem Zielaccoun
 
 > **Information vom 19.12.2017:** Falls easy_install nicht funktioniert, kann `pip2.6 install dnspython --user` verwendet werden (Danke, Klaus!)
 
-Zum Herunterladen des Pakets für Mailman 2.1.17 loggen wir uns zunächst bei Uberspace ein und laden dann das Paket, entpacken es in `~/tmp/` und wechseln in das Verzeichnis:
+Zum Herunterladen des Pakets für Mailman 2.1.29 loggen wir uns zunächst bei Uberspace ein und laden dann das Paket, entpacken es in `~/tmp/` und wechseln in das Verzeichnis:
 
-    wget http://ftp.gnu.org/gnu/mailman/mailman-2.1.17.tgz
-    tar xfz mailman-2.1.17.tgz -C ~/tmp/
-    cd ~/tmp/mailman-2.1.17/
+```
+wget http://ftp.gnu.org/gnu/mailman/mailman-2.1.29.tgz
+tar xfz mailman-2.1.29.tgz -C ~/tmp/
+cd ~/tmp/mailman-2.1.29/
+```
 
 Bevor wir weiter machen, legen wir nun auch schon das Installationsverzeichnis an:
 
-    mkdir /var/www/virtual/`whoami`/mailman
-    chmod a+rx,g+ws /var/www/virtual/`whoami`/mailman
-
+```
+mkdir /var/www/virtual/`whoami`/mailman
+chmod a+rx,g+ws /var/www/virtual/`whoami`/mailman
+```
 
 ### Schritt 2 - das Configure-Skript laufen lassen
 
 Nun müssen wir Mailmans configure laufen lassen mit folgendem Aufbau (Optionen nachzulesen in der [offiziellen Installationsanleitung](https://www.gnu.org/software/mailman/mailman-install/mailman-install.html)).
 
-    ./configure --with-username=`whoami` --with-groupname=`whoami` \
-    --prefix=/var/www/virtual/`whoami`/mailman/ \
-    --with-mail-gid=`whoami` --with-cgi-gid=`whoami` \
-    --with-mailhost=$mailhost \
-    --with-urlhost=$urlhost
-
+```
+./configure --with-username=`whoami` --with-groupname=`whoami` \
+--prefix=/var/www/virtual/`whoami`/mailman/ \
+--with-mail-gid=`whoami` --with-cgi-gid=`whoami` \
+```
 
 ### Schritt 3 - make & make install
 
 Wenn alles gut gegangen ist bei configure, können wir nun make ausführen:
 
-    make
+```
+make
+```
 
 Erscheinen hier keine Fehler, kann auch	`make install`	ausgeführt werden.
 
 
 ### Schritt 4 - Installation prüfen
 
-Wir wechseln mit `cd /var/www/virtual/`whoami`/mailman` in das Verzeichnis und führen dort das Skript `bin/check_perms` aus. Dieses Überprüft die (Mindest-!)Berechtigungen der Verzeichnisse und gibt uns bei Abweichungen von der Norm ein paar Hinweise zum Beheben. Werden Fehler gefunden, können diese durch erneuten Aufruf des Skripts mit `bin/check_perms -f` behoben werden. Idealerweise behebt ihr alle Fehler, die das Skript nicht beheben kann, noch manuell (z.B. die Verzeichnisrechte für das private archive folder).
+Wir wechseln mit ``cd /var/www/virtual/`whoami`/mailman`` in das Verzeichnis und führen dort das Skript `bin/check_perms` aus. Dieses Überprüft die (Mindest-!)Berechtigungen der Verzeichnisse und gibt uns bei Abweichungen von der Norm ein paar Hinweise zum Beheben. Werden Fehler gefunden, können diese durch erneuten Aufruf des Skripts mit ``bin/check_perms -f`` behoben werden. Idealerweise behebt ihr alle Fehler, die das Skript nicht beheben kann, noch manuell (z.B. die Verzeichnisrechte für das private archive folder).
 
 
 ### Schritt 5 - den Webserver vorbereiten
 
 Bei diesem Schritt hatte ich die meisten Probleme. Da wir bei Uberspace keinen Zugriff auf die VirtualHost-Konfiguration des Webservers haben, kann dieser Schritt nicht entsprechend des offiziellen Handbuchs befolgt werden. Stattdessen müssen wir einen SymLink und eine htaccess Datei anlegen:
 
-    ln -s /var/www/virtual/`whoami`/mailman/cgi-bin /var/www/virtual/`whoami`/html/mailman
-    ln -s /var/www/virtual/`whoami`/mailman/archives/public /var/www/virtual/`whoami`/html/pipermail
-    printf "Options +ExecCGI\nSetHandler cgi-script" > /var/www/virtual/`whoami`/mailman/cgi-bin/.htaccess
+```
+ln -s /var/www/virtual/`whoami`/mailman/cgi-bin /var/www/virtual/`whoami`/html/mailman
+ln -s /var/www/virtual/`whoami`/mailman/archives/public /var/www/virtual/`whoami`/html/pipermail
+printf "Options +ExecCGI\nSetHandler cgi-script" > /var/www/virtual/`whoami`/mailman/cgi-bin/.htaccess
+```
 
 Anschließend korrigieren wir noch die Datei- und Verzeichnisrechte für die CGI-Skripte:
 
-    chmod -R 0755 /var/www/virtual/`whoami`/mailman/cgi-bin
-
+```
+chmod -R 0755 /var/www/virtual/`whoami`/mailman/cgi-bin
+```
 
 ### Schritt 6 - auf die Verwendung von qmail vorbereiten
 
@@ -90,30 +97,30 @@ In Mailman können Administratoren neue Listen per Webinterface anlegen. Dieses 
 
 Im [Handbuch zur Installation](https://www.gnu.org/software/mailman/mailman-install/qmail-issues.html)gibt es ein einfaches Skript, welches wir benutzen können, um die nötigen .qmail-Dateien anzulegen, die Mailman zum Funktionieren braucht. Da dieses noch leicht angepasst werden muss, hier ein Vollzitat mit angepassten Pfaden:
 
-    #!/bin/sh
-    if [ $# = 1 ]; then
-    i=$1
-    echo Making links to $i in the current directory...
-    echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman post $i" > .qmail-$i
-    echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman admin $i" > .qmail-$i-admin
-    echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman bounces $i" > .qmail-$i-bounces
-    # The following line is for VERP
-    # echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman bounces $i" > .qmail-$i-bounces-default
-    echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman confirm $i" > .qmail-$i-confirm
-    echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman join $i" > .qmail-$i-join
-    echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman leave $i" > .qmail-$i-leave
-    echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman owner $i" > .qmail-$i-owner
-    echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman request $i" > .qmail-$i-request
-    echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman subscribe $i" > .qmail-$i-subscribe
-    echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman unsubscribe $i" > .qmail-$i-unsubscribe
-    fi
+```
+#!/bin/sh
+if [ $# = 1 ]; then
+i=$1
+echo Making links to $i in the current directory...
+echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman post $i" > .qmail-$i
+echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman admin $i" > .qmail-$i-admin
+echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman bounces $i" > .qmail-$i-bounces
+# The following line is for VERP
+# echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman bounces $i" > .qmail-$i-bounces-default
+echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman confirm $i" > .qmail-$i-confirm
+echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman join $i" > .qmail-$i-join
+echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman leave $i" > .qmail-$i-leave
+echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman owner $i" > .qmail-$i-owner
+echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman request $i" > .qmail-$i-request
+echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman subscribe $i" > .qmail-$i-subscribe
+echo "|preline /var/www/virtual/`whoami`/mailman/mail/mailman unsubscribe $i" > .qmail-$i-unsubscribe
+fi
+```
 
 Dieses Skript wird dann im Home-Verzeichnis z.B. als addlist.sh als ausführbare Datei abgelegt und muss ausgeführt werden, wenn eine neue Liste angelegt wird (als `~/addlist.sh listenname`).
 
 
 ### Schritt 7 - die restliche Installation
-
-> **Update 25.03.2017:** In neueren Versionen ist diese Anpassung nicht mehr nötig, da die SMTP Auth Option offiziell übernommen und eingepflegt wurde!
 
 Der Rest der Installation läuft mit einer Ausnahme ab wie im [offiziellen Handbuch](https://www.gnu.org/software/mailman/mailman-install/customizing.html) geschrieben. Die Ausnahme bezieht sich auf die Anpassung der mm_cfg.py in /var/www/virtual/`whoami`/mailman/Mailman:
 
@@ -121,37 +128,29 @@ Zuerst legt ein [E-Mail Postfach](https://wiki.uberspace.de/mail:vmailmgr) für 
 
 Dann müssen an der dafür vorgesehenen Stelle (siehe Originaldatei) folgende Zeilen eingefügt werden:
 
-    SMTP_AUTH = Yes
-    SMTPHOST = '$uberspacehost.uberspace.de'
-    SMTPPORT = '587'
-    SMTP_USER = 'listenversender@domain.tld'
-    SMTP_PASSWD = 'HollaDieWaldF33!'
-    DELIVERY_MODULE = 'ASMTPDirect'
+```
+SMTP_AUTH = True
+SMTP_USE_TLS = True
+SMTPHOST = '$uberspacehost.uberspace.de'
+SMTPPORT = '587'
+
+SMTP_USER = 'listenversender@domain.tld'
+SMTP_PASSWD = 'HollaDieWaldF33!'
+```
 
 
-Das Modul "ASMTPDirect" existiert allerdings noch nicht, dafür müssen wir noch wenige Schritte durchführen. Zunächst wechseln wir in das Verzeichnis <i>/mailman/Mailman/Handlers</i> und kopieren die SMTPDirect.py:
-
-    cd /var/www/virtual/`whoami`/mailman/Mailman/Handlers
-    cp SMTPDirect.py ASMTPDirect.py
-
-Nun muss die ASMTPDirect.py noch bearbeitet werden (z.B. mit nano), wobei folgende zwei Zeilen zwischen Zeile 64 und 65 der Originaldatei eingefügt werden müssen:
-
-    if mm_cfg.SMTP_AUTH:
-                    self.__conn.login(mm_cfg.SMTP_USER, mm_cfg.SMTP_PASSWD)
-
-Anschließend die Änderungen speichern. Der Rest kann komplett konform mit der [offiziellen Anleitung](https://www.gnu.org/software/mailman/mailman-install/customizing.html) befolgt werden. Hier kann mit Schritt 7 weiter gemacht werden (Customizing).
-
-
-### Schritt 9
+### Schritt 8
 
 Im Schritt [Set up cron](https://www.gnu.org/software/mailman/mailman-install/node41.html) soll man den cron als user `mailman` (`crontab -u mailman crontab.in`) anlegen. 
 
 Da mailman unter deinem uberspace-user läuft muss und kann man den [cron](https://wiki.uberspace.de/system:cron) als uberspace-user anlegen. 
 
-		cd /var/www/virtual/`whoami`/mailman/cron/
-		crontab crontab.in
+```
+cd /var/www/virtual/`whoami`/mailman/cron/
+crontab crontab.in
+```
 
-### Schritt 10 
+### Schritt 9
 
 
 Bei [Schritt 10](https://www.gnu.org/software/mailman/mailman-install/node42.html) sind nochmal ein paar Anpassungen notwendig. Wir starten hier den "qrunner" der dafür sorgt, dass Mailman ankommende Mails auch an die Mitglieder der Mailinglisten verteilen kann. Außerdem stellen wir sicher, dass der qrunner nach einem Reboot automatisch gestartet wird. Dazu greifen wir auf die daemontools, die von uberspace bereit gestellt werden, zurück.
@@ -160,53 +159,73 @@ Bei [Schritt 10](https://www.gnu.org/software/mailman/mailman-install/node42.htm
 
 Zunächst legen wir uns einen eigenen ~/service Ordner an:
 
-    test -d ~/service || uberspace-setup-svscan
+```
+test -d ~/service || uberspace-setup-svscan
+```
 
 Dann erstellen wir den Ordner ~/etc/mailman-supervise:
 
-    mkdir ~/etc/mailman-supervise
+```
+mkdir ~/etc/mailman-supervise
+```
 
 Anschließend brauchen wir in diesem Ordner ein Skript mit dem Namen run, das wir z.B. mit nano erstellen:
 
-    nano ~/etc/mailman-supervise/run
+```
+nano ~/etc/mailman-supervise/run
+```
 
 Der Inhalt des Skripts ist folgender:
 
-    #!/bin/sh
-    exec ./qrunner
+```
+#!/bin/sh
+exec ./qrunner
+```
 
 Als nächstes erstellen wir das Skript ~/etc/mailman-supervise/qrunner mit folgendem Inhalt:
 
-    #!/bin/sh
-    while `/bin/true`; do
-    /var/www/virtual/`whoami`/mailman/bin/qrunner --runner=All --once
-    sleep 60
-    done
+```
+#!/bin/sh
+while `/bin/true`; do
+/var/www/virtual/`whoami`/mailman/bin/qrunner --runner=All --once
+sleep 60
+done
+```
 
 Jetzt erstellen wir den Ordner ~/etc/mailman-supervise/log:
-    mkdir ~/etc/mailman-supervise/log
+
+```
+mkdir ~/etc/mailman-supervise/log
+```
 
 Und das Skript ~/etc/mailman-supervise/log/run mit dem Inhalt:
 
-    #!/bin/sh
-    exec multilog t ./main
+```
+#!/bin/sh
+exec multilog t ./main
+```
 
 Nun ändern wir noch die Rechte:
 
-    chmod 755 ~/etc/mailman-supervise/*
-    chmod 755 ~/etc/mailman-supervise/log/run
+```
+chmod 755 ~/etc/mailman-supervise/*
+chmod 755 ~/etc/mailman-supervise/log/run
+```
 
 Als letztes verlinken wir den Ordner ~/etc/mailman-supervise nach ~/service:
-    ln -s ~/etc/mailman-supervise ~/service
 
-Nun läuft der qrunner. Mit dem Befehl `svstat ~/service/mailman-supervise` kann man das noch überprüfen. Der Befehl gibt zurück wie lange der Daemon bereits läuft.
+```
+ln -s ~/etc/mailman-supervise ~/service
+```
 
-Ergänzung zu Schritt 10 von Jonatan von [Uberspace](https://uberspace.de).
+Nun läuft der qrunner. Mit dem Befehl ``svstat ~/service/mailman-supervise`` kann man das noch überprüfen. Der Befehl gibt zurück wie lange der Daemon bereits läuft.
+
+Ergänzung zu Schritt 9 von Jonatan von [Uberspace](https://uberspace.de).
 
 ## Debug
 
 Du hast alles so gemacht wie oben beschreiben und es läuft trotzdem nicht?
-Unter `/var/www/virtual/`whoami`/mailman/logs` werden zahlreiche logs geschrieben.
+Unter ``/var/www/virtual/`whoami`/mailman/logs`` werden zahlreiche logs geschrieben.
 
 Oder im [offiziellen Troubleshooting](https://www.gnu.org/software/mailman/mailman-install/troubleshooting.html) nachschlagen.
 
@@ -217,8 +236,12 @@ Oder im [offiziellen Troubleshooting](https://www.gnu.org/software/mailman/mailm
 
 Dazu in in der Datei `/mailman/Mailman/mm_cfg.py` folgendes Pattern eingeben: 
 
-		DEFAULT_URL_PATTERN = 'https://%s/mailman/'
+```
+DEFAULT_URL_PATTERN = 'https://%s/mailman/'
+```
 
 Und dann die URLs neu laden lassen.
 
-		/var/www/virtual/`whoami`/mailman/bin/withlist -l -a -r fix_url
+```
+/var/www/virtual/`whoami`/mailman/bin/withlist -l -a -r fix_url
+```
