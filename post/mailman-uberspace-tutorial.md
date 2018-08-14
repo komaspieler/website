@@ -9,7 +9,7 @@ date: 2015-09-16
 <!--more-->
 Uberspace bietet von Haus aus [ezmlm-idx Mailinglisten](https://wiki.uberspace.de/mail:ezmlmidx) an. ezmlmidx hat aber z.B. kein Webinterface zum Abbonieren und muss per Kommandozeile administriert werden. Wer seinen Listenmitgliedern und Admins ein Webinterface bieten möchte oder aus anderen Gründen einen mailman haben will, für den ist bei Uberspace die Installation und Benutzung von Mailman wie so vieles anderes ebenfalls möglich - es müssen aber einige Besonderheiten bedacht werden, die man normalerweise nicht berücksichtigen würde.
 
-Dieses Tutorial bezieht sich auf das aktuelle [uberspace mit CentOS 6](https://uberspace.de/tech), nicht auf die [uberspace 7 beta](https://blog.uberspace.de/wip-die-u7-public-beta/).
+Dieses Tutorial bezieht sich auf das aktuelle [uberspace mit CentOS 6](https://uberspace.de/tech), nicht auf die [uberspace 7 beta](https://blog.uberspace.de/wip-die-u7-public-beta/). Für Uberspace 7 ist ein Eintrag im [Uberspace Lab](https://lab.uberspace.de) in Arbeit.
 
 
 ---
@@ -122,13 +122,18 @@ Dieses Skript wird dann im Home-Verzeichnis z.B. als addlist.sh als ausführbare
 
 ### Schritt 7 - die restliche Installation
 
-Der Rest der Installation läuft mit einer Ausnahme ab wie im [offiziellen Handbuch](https://www.gnu.org/software/mailman/mailman-install/customizing.html) geschrieben. Die Ausnahme bezieht sich auf die Anpassung der mm_cfg.py in /var/www/virtual/`whoami`/mailman/Mailman:
+Der Rest der Installation läuft mit einer Ausnahme ab wie im [offiziellen Handbuch](https://www.gnu.org/software/mailman/mailman-install/customizing.html) geschrieben. 
+
+Es sind jedoch noch ein paar Einträge in der ``/var/www/virtual/`whoami`/mailman/Mailman/mm_cfg.py`` hinzuzufügen:
 
 Zuerst legt ein [E-Mail Postfach](https://wiki.uberspace.de/mail:vmailmgr) für den Listenverkehr im Webinterface von Uberspace oder auf der [Konsole](https://wiki.uberspace.de/mail:vmailmgr#e-mail-account_anlegen) an (z.B. 'listenversender@domain.tld' mit Passwort 'HollaDieWaldF33!' - ihr benutzt natürlich andere Daten!!).
 
-Dann müssen an der dafür vorgesehenen Stelle (siehe Originaldatei) folgende Zeilen eingefügt werden:
+Dann müssen folgende Einträge hinzugefügt werden:
 
 ```
+DEFAULT_URL_HOST = "$mailhost (ersetzen)"
+DEFAULT_EMAIL_HOST = "$urlhost (ersetzen)"
+
 SMTP_AUTH = True
 SMTP_USE_TLS = True
 SMTPHOST = '$uberspacehost.uberspace.de'
